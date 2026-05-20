@@ -1,0 +1,1 @@
+För custom-komponenter som används av flera komponenter, ex. Navbar.jsx. 
