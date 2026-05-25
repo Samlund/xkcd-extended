@@ -1,9 +1,7 @@
-const BASE_URL = "/xkcd"
-
 async function request(path, options = {}) {
     const { body, headers, ...rest } = options;
 
-    const response = await fetch(`${BASE_URL}${path}`, {
+    const response = await fetch(path, {
         ...rest,
         headers: {
             "Content-Type": "application/json",

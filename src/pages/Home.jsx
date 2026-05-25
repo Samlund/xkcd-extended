@@ -1,13 +1,15 @@
-import { api } from "@/lib/api.js";
+"use strict";
+
 import { useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/spinner.jsx";
+import { xkcd } from "@/lib/external/xkcd.jsx";
 
 function Home() {
     const [latest, setLatest] = useState();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        api.get("/info.0.json")
+        xkcd.getLatest()
             .then(setLatest)
             .finally( () => setLoading(false));
     }, []);

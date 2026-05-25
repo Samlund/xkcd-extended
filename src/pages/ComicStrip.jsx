@@ -1,8 +1,8 @@
 import ComicCarousel from "@/components/layout/ComicCarousel";
 import { Spinner } from "@/components/ui/spinner";
-import { api } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { xkcd } from "@/lib/external/xkcd.jsx";
 
 function ComicStrip({ params }) {
   const { id } = useParams();
@@ -25,7 +25,7 @@ function ComicStrip({ params }) {
   }
 
   function setLatestComicNumber() {
-    api.get("/info.0.json").then((res) => {
+    xkcd.getLatest().then((res) => {
       setLatest(res.num);
     });
   }
@@ -34,13 +34,13 @@ function ComicStrip({ params }) {
     const promises = [];
     promises.push(
       id > 1
-        ? api.get(`/${parseInt(id) - 1}/info.0.json`)
+        ? xkcd.getById(parseInt(id) - 1)
         : Promise.resolve({}),
     );
-    promises.push(api.get(`/${parseInt(id)}/info.0.json`));
-    if (id < latest) promises.push(api.get(`/${parseInt(id) + 1}/info.0.json`));
+    promises.push(xkcd.getById(id));
+    if (id < latest) promises.push(xkcd.getById(parseInt(id) + 1));
     if (id < latest - 2)
-      promises.push(api.get(`/${parseInt(id) + 2}/info.0.json`));
+      promises.push(xkcd.getById(parseInt(id) + 2));
     return promises;
   }
 
