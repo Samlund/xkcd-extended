@@ -3,23 +3,23 @@ import { Toggle } from "@/components/ui/toggle";
 import { Heart } from "lucide-react";
 
 import {
-	Combobox,
-	ComboboxContent,
-	ComboboxInput,
-	ComboboxItem,
-	ComboboxList,
+  Combobox,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
 } from "@/components/ui/combobox";
 import {
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
-export function FavoriteBar({ id }) {
+function FavoriteBar({ id }) {
   function addToFavorites() {
     localStorage.setItem(id, JSON.stringify(inputCategory));
     setIsFavorite(true);

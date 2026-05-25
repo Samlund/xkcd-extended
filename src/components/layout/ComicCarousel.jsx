@@ -36,7 +36,7 @@ export function ComicCarousel({ id, comicList, latest, loading }) {
           )}
         </CarouselItem>
         <CarouselItem className="sm:basis-5/5 lg:basis-3/5 flex flex-col overflow-auto h-[80vh] border-4 pl-0 m-4 rounded-md">
-          <FavoriteBar id={id} className="sticky top-0 z-10" />
+          <FavoriteBar id={id} />
           <img
             src={comicList[1].img}
             className="h-auto m-auto"

@@ -3,6 +3,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { xkcd } from "@/lib/external/xkcd.js";
+import Navbar from "@/components/layout/Navbar";
 
 function ComicStrip({ params }) {
   const { id } = useParams();
@@ -33,14 +34,11 @@ function ComicStrip({ params }) {
   function createComicPromises() {
     const promises = [];
     promises.push(
-      id > 1
-        ? xkcd.getById(parseInt(id) - 1)
-        : Promise.resolve({}),
+      id > 1 ? xkcd.getById(parseInt(id) - 1) : Promise.resolve({}),
     );
     promises.push(xkcd.getById(id));
     if (id < latest) promises.push(xkcd.getById(parseInt(id) + 1));
-    if (id < latest - 2)
-      promises.push(xkcd.getById(parseInt(id) + 2));
+    if (id < latest - 2) promises.push(xkcd.getById(parseInt(id) + 2));
     return promises;
   }
 
@@ -70,13 +68,16 @@ function ComicStrip({ params }) {
   if (!comicList) return <Spinner />;
 
   return (
-    <div className="pt-5 px-12 w-[80vw] mx-auto">
-      <ComicCarousel
-        id={id}
-        latest={latest}
-        comicList={comicList}
-        loading={loading}
-      />
+    <div className="flex flex-col">
+      <Navbar />
+      <div className="pt-5 px-12 w-[98vw] mx-auto">
+        <ComicCarousel
+          id={id}
+          latest={latest}
+          comicList={comicList}
+          loading={loading}
+        />
+      </div>
     </div>
   );
 }
