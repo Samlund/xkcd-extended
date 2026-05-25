@@ -66,7 +66,7 @@ function FavoriteBar({ id }) {
 
   return (
     <div className="flex justify-end m-2 sticky top-2 ">
-      <Toggle pressed={isFavorite} onPressedChange={handleToggle} size="lg">
+      <Toggle pressed={isFavorite} onPressedChange={handleToggle} size="lg" className="cursor-pointer">
         <Heart className="group-data-[state=on]/toggle:fill-destructive" />
       </Toggle>
       <Dialog open={displayInput}>
@@ -95,11 +95,12 @@ function FavoriteBar({ id }) {
               onClick={() => {
                 setDisplayInput(false);
               }}
+              className="cursor-pointer"
             >
               Cancel
             </Button>
             <DialogClose asChild>
-              <Button disabled={!inputCategory} onClick={addToFavorites}>
+              <Button disabled={!inputCategory} onClick={addToFavorites} className="cursor-pointer">
                 Submit
               </Button>
             </DialogClose>
