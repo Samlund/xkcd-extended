@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button.jsx";
 import { ChevronFirst, ChevronLast } from "lucide-react";
 import { Link } from "react-router";
 import ScrollToTop from "@/components/layout/ScrollToTop"
+import Navbar from "@/components/layout/Navbar.jsx";
 
 function Home() {
     const pageSize = 10;
@@ -42,6 +43,7 @@ function Home() {
 
     return (
         <>
+            <Navbar />
             <div className="flex flex-row justify-center gap-2 pt-4">
                 <Link to="/comicstrips/1">
                     <Button className="cursor-pointer">
