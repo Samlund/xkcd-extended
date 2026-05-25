@@ -2,7 +2,7 @@ import ComicCarousel from "@/components/layout/ComicCarousel";
 import { Spinner } from "@/components/ui/spinner";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { xkcd } from "@/lib/external/xkcd.jsx";
+import { xkcd } from "@/lib/external/xkcd.js";
 
 function ComicStrip({ params }) {
   const { id } = useParams();

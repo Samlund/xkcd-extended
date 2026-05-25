@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/spinner.jsx";
-import { xkcd } from "@/lib/external/xkcd.jsx";
+import { xkcd } from "@/lib/external/xkcd.js";
 
 function Home() {
     const [latest, setLatest] = useState();
