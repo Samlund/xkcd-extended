@@ -50,7 +50,6 @@ function Home() {
 
     return (
         <>
-            <Navbar />
             <div className="flex flex-row justify-center pt-4">
                 <Button className="cursor-pointer" onClick={() => setReversed(reversed => !reversed)}>
                     <Repeat className="translate-y-px"/>

@@ -69,7 +69,6 @@ function ComicStrip({ params }) {
 
   return (
     <div className="flex flex-col">
-      <Navbar />
       <div className="pt-5 px-12 w-[98vw] mx-auto">
         <ComicCarousel
           id={id}
