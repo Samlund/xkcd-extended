@@ -27,15 +27,17 @@ function FavoriteBar({ id }) {
   }
 
   function loadCategories() {
-    const len = localStorage.length;
-    const keys = [];
-    for (let i = 0; i < len; i++) {
-      keys.push(localStorage.key(i));
+    let vals = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      try {
+        vals = [...JSON.parse(localStorage.getItem(key))];
+
+      } catch (e) {
+        // silently ignore localStorage items that are not valid JSON
+      }
     }
-    const vals = [
-      ...new Set(keys.map((key) => JSON.parse(localStorage.getItem(key)))),
-    ];
-    setCategories(vals);
+    setCategories([...new Set(vals)]);
   }
 
   function removeFromFavorites() {
@@ -100,7 +102,7 @@ function FavoriteBar({ id }) {
               Cancel
             </Button>
             <DialogClose asChild>
-              <Button disabled={!inputCategory} onClick={addToFavorites} className="cursor-pointer">
+              <Button onClick={addToFavorites} className="cursor-pointer">
                 Submit
               </Button>
             </DialogClose>
