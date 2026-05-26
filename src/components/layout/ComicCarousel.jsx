@@ -25,16 +25,16 @@ export function ComicCarousel({ id, comicList, latest, loading }) {
   return (
     <Carousel opts={{ watchDrag: false }} className="w-full">
       <CarouselContent className="flex justify-center items-center m-0">
-        <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] border-4 pl-0 rounded-md">
-          {comicList[0].img ? (
+        {(comicList[0]?.img ?? null) ? (
+          <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] border-4 pl-0 rounded-md">
             <img
               src={comicList[0].img}
               className="max-w-full max-h-full object-contain"
             />
-          ) : (
-            <div></div>
-          )}
-        </CarouselItem>
+          </CarouselItem>
+        ) : (
+          <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] invisible" />
+        )}
         <CarouselItem className="sm:basis-5/5 lg:basis-3/5 flex flex-col overflow-auto h-[80vh] border-4 pl-0 m-4 rounded-md">
           <FavoriteBar id={id} />
           <img
@@ -43,27 +43,43 @@ export function ComicCarousel({ id, comicList, latest, loading }) {
             id={comicList[1].num}
           />
         </CarouselItem>
-        <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] border-4 pl-0 rounded-md">
-          {comicList[2]?.img ? (
+        {(comicList[2]?.img ?? null) ? (
+          <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] border-4 pl-0 rounded-md">
             <img
               src={comicList[2].img}
               className="max-w-full max-h-full object-contain"
             />
-          ) : (
-            <div></div>
-          )}
-        </CarouselItem>
+          </CarouselItem>
+        ) : (
+          <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] invisible" />
+        )}
       </CarouselContent>
-      <CarouselNext
-        func={nextComic}
-        loading={loading}
-        className="active:data-[slot=carousel-next]:translate-y-[calc(-50%+1px)]"
-      />
-      <CarouselPrevious
-        func={previousComic}
-        loading={loading}
-        className="active:data-[slot=carousel-previous]:translate-y-[calc(-50%+1px)]"
-      />
+      {(comicList[2]?.img ?? null) ? (
+        <CarouselNext
+          func={nextComic}
+          loading={loading}
+          className="active:data-[slot=carousel-next]:translate-y-[calc(-50%+1px)] cursor-pointer"
+        />
+      ) : (
+        <CarouselNext
+          func={nextComic}
+          loading={true}
+          className="active:data-[slot=carousel-next]:translate-y-[calc(-50%+1px)]"
+        />
+      )}
+      {(comicList[0]?.img ?? null) ? (
+        <CarouselPrevious
+          func={previousComic}
+          loading={loading}
+          className="active:data-[slot=carousel-previous]:translate-y-[calc(-50%+1px)] cursor-pointer"
+        />
+      ) : (
+        <CarouselPrevious
+          func={previousComic}
+          loading={true}
+          className="active:data-[slot=carousel-previous]:translate-y-[calc(-50%+1px)]"
+        />
+      )}
     </Carousel>
   );
 }
