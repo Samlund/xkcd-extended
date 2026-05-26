@@ -1,38 +1,45 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Spinner } from "@/components/ui/spinner.jsx";
 import { xkcd } from "@/lib/external/xkcd.js";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll.jsx";
 import FavoriteBar from "@/components/layout/FavoriteBar.jsx";
-import { Fragment } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button.jsx";
-import { ChevronFirst, ChevronLast } from "lucide-react";
-import { Link } from "react-router";
+import { Repeat } from "lucide-react";
 import ScrollToTop from "@/components/layout/ScrollToTop"
 import Navbar from "@/components/layout/Navbar.jsx";
 
 function Home() {
+    const [reversed, setReversed] = useState(false);
     const pageSize = 10;
 
     const latestQuery = useQuery({
         queryKey: ["comics", "latest"],
         queryFn: () => xkcd.getLatest(),
     });
+    const latestId = latestQuery.data?.num;
 
     const comicsQuery = useInfiniteQuery({
-        queryKey: ["comics"],
+        queryKey: ["comics", reversed ? "asc" : "desc"],
         queryFn: async ({ pageParam }) => {
             let ids = [];
-            for (let i = 0; i < pageSize; ++i) ids.push(pageParam - i);
+            for (let i = 0; i < pageSize; ++i) ids.push(reversed ? pageParam + i : pageParam - i);
             ids = ids.filter(id => id > 0);
             return Promise.all(ids.map(id => xkcd.getById(id)));
         },
-        initialPageParam: latestQuery.data?.num,
+        initialPageParam: reversed ? 1 : latestId,
         getNextPageParam: (lastPage) => {
-            const lowestId = lastPage[lastPage.length - 1].num;
-            return lowestId > 1 ? lowestId - 1 : undefined;
+            if (reversed) {
+                const highestId = lastPage[lastPage.length - 1].num;
+                return highestId < latestId ? highestId + 1 : undefined;
+            } else {
+                const lowestId = lastPage[lastPage.length - 1].num;
+                return lowestId > 1 ? lowestId - 1 : undefined;
+            }
         },
         enabled: latestQuery.isSuccess,
-    })
+        placeholderData: keepPreviousData,
+    });
 
     const hasMore = comicsQuery.hasNextPage && !comicsQuery.isFetchingNextPage;
     const loadRef = useInfiniteScroll(comicsQuery.fetchNextPage, hasMore);
@@ -44,19 +51,11 @@ function Home() {
     return (
         <>
             <Navbar />
-            <div className="flex flex-row justify-center gap-2 pt-4">
-                <Link to="/comicstrips/1">
-                    <Button className="cursor-pointer">
-                        <ChevronFirst className="h-4 w-4 translate-y-px"/>
-                        Oldest
-                    </Button>
-                </Link>
-                <Link to={`/comicstrips/${latestQuery.data?.num}`}>
-                    <Button className="cursor-pointer">
-                        Newest
-                        <ChevronLast className="h-4 w-4 translate-y-px"/>
-                    </Button>
-                </Link>
+            <div className="flex flex-row justify-center pt-4">
+                <Button className="cursor-pointer" onClick={() => setReversed(reversed => !reversed)}>
+                    <Repeat className="translate-y-px"/>
+                    Reverse
+                </Button>
             </div>
             <div className="flex flex-col items-center">
                 {comics.map(comic => (
