@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button.jsx";
 import { Repeat } from "lucide-react";
 import ScrollToTop from "@/components/layout/ScrollToTop"
 import Navbar from "@/components/layout/Navbar.jsx";
+import LoadingState from "@/components/layout/LoadingState.jsx";
 
 function Home() {
     const [reversed, setReversed] = useState(false);
@@ -44,7 +45,7 @@ function Home() {
     const hasMore = comicsQuery.hasNextPage && !comicsQuery.isFetchingNextPage;
     const loadRef = useInfiniteScroll(comicsQuery.fetchNextPage, hasMore);
 
-    if (latestQuery.isPending || comicsQuery.isPending) return <Spinner />;
+    if (latestQuery.isPending || comicsQuery.isPending) return <LoadingState />;
 
     const comics = comicsQuery.data?.pages.flat() ?? [];
 

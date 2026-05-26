@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { xkcd } from "@/lib/external/xkcd.js";
 import Navbar from "@/components/layout/Navbar";
+import LoadingState from "@/components/layout/LoadingState.jsx";
 
 function ComicStrip({ params }) {
   const { id } = useParams();
@@ -65,7 +66,7 @@ function ComicStrip({ params }) {
     }
   }, [id, latest]);
 
-  if (!comicList) return <Spinner />;
+  if (!comicList) return <LoadingState />;
 
   return (
     <div className="flex flex-col">
