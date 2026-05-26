@@ -112,8 +112,6 @@ function Favorites() {
 
     return (
         <>
-            <Navbar />
-
             <main className="flex-1 flex flex-col items-center px-4 pt-6 pb-12 w-full max-w-2xl mx-auto gap-8">
                 <div className="w-full bg-card border rounded-xl px-6 pt-6 pb-2">
 
