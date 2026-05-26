@@ -18,7 +18,7 @@ function useInfiniteScroll(fetchData, hasMore) {
                 entries => {
                     if (entries[0]?.isIntersecting && hasMore) callbackRef.current();
                 },
-                { rootMargin: "200px" }
+                { rootMargin: "400px" }
             );
 
             observer.observe(node);
