@@ -26,11 +26,14 @@ export function ComicCarousel({ id, comicList, latest, loading }) {
     <Carousel opts={{ watchDrag: false }} className="w-full">
       <CarouselContent className="flex justify-center items-center m-0">
         {(comicList[0]?.img ?? null) ? (
-          <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] border-4 pl-0 rounded-md">
-            <img
-              src={comicList[0].img}
-              className="max-w-full max-h-full object-contain"
-            />
+          <CarouselItem className="basis-1/6 flex flex-col h-[40vh] border-4 pl-0 rounded-md overflow-hidden">
+            <FavoriteBar id={comicList[0].num} />
+            <div className="flex-1 min-h-0 w-full flex items-center justify-center">
+              <img
+                src={comicList[0].img}
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
           </CarouselItem>
         ) : (
           <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] invisible" />
@@ -44,11 +47,14 @@ export function ComicCarousel({ id, comicList, latest, loading }) {
           />
         </CarouselItem>
         {(comicList[2]?.img ?? null) ? (
-          <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] border-4 pl-0 rounded-md">
-            <img
-              src={comicList[2].img}
-              className="max-w-full max-h-full object-contain"
-            />
+          <CarouselItem className="basis-1/6 flex flex-col h-[40vh] border-4 pl-0 rounded-md overflow-hidden">
+            <FavoriteBar id={comicList[2].num} />
+            <div className="flex-1 min-h-0 w-full flex items-center justify-center">
+              <img
+                src={comicList[2].img}
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
           </CarouselItem>
         ) : (
           <CarouselItem className="basis-1/6 flex items-center justify-center h-[40vh] invisible" />
