@@ -7,8 +7,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button.jsx";
 import { Repeat } from "lucide-react";
 import ScrollToTop from "@/components/layout/ScrollToTop"
-import Navbar from "@/components/layout/Navbar.jsx";
 import LoadingState from "@/components/layout/LoadingState.jsx";
+import { Link } from "react-router";
 
 function Home() {
     const [reversed, setReversed] = useState(false);
@@ -61,8 +61,11 @@ function Home() {
                 {comics.map(comic => (
                     <div key={comic.num} className="flex flex-col overflow-auto border-4 m-4 rounded-md">
                         <FavoriteBar id={comic.num} className="sticky top-0 z-10" />
-                        <img className="max-w-full h-auto pb-12" src={comic.img} alt="Comic strip" />
+                        <Link to={`/comicstrips/${comic.num}`}>
+                            <img className="max-w-full h-auto pb-12" src={comic.img} alt="Comic strip" />
+                        </Link>
                     </div>
+
                 ))}
                 {comicsQuery.hasNextPage && <div ref={loadRef} className="h-px" /> }
                 {comicsQuery.isFetchingNextPage && <Spinner className="size-7 mb-4" />}
