@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { xkcd } from "@/lib/external/xkcd";
-import Navbar from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Toggle } from "@/components/ui/toggle";
@@ -84,7 +83,6 @@ function Favorites() {
     if (favoritesQuery.isPending) {
         return (
             <div className="flex flex-col min-h-screen">
-                <Navbar />
                 <div className="flex justify-center items-center flex-grow">
                     <Spinner className="size-8" />
                 </div>
