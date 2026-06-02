@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { Heart } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import {
   Combobox,
@@ -19,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
-function FavoriteBar({ id }) {
+function FavoriteBar({ id, className }) {
   function addToFavorites() {
     localStorage.setItem(id, JSON.stringify(inputCategory));
     setIsFavorite(true);
@@ -32,7 +33,6 @@ function FavoriteBar({ id }) {
       const key = localStorage.key(i);
       try {
         vals = [...JSON.parse(localStorage.getItem(key))];
-
       } catch (e) {
         // silently ignore localStorage items that are not valid JSON
       }
@@ -67,49 +67,50 @@ function FavoriteBar({ id }) {
   });
 
   return (
-    <div className="flex justify-end m-2 sticky top-2 ">
-      <Toggle pressed={isFavorite} onPressedChange={handleToggle} size="lg" className="cursor-pointer">
-        <Heart className="group-data-[state=on]/toggle:fill-destructive" />
-      </Toggle>
-      <Dialog open={displayInput}>
-        <DialogContent showCloseButton={false}>
-          <DialogHeader>
-            <DialogTitle className="text-center">Add favorite</DialogTitle>
-            <DialogDescription />
-            <Combobox
-              items={categories}
-              modal={false}
-              value={inputCategory}
-              onInputValueChange={handleInputCategoryChange}
-            >
-              <ComboboxInput placeholder="Name of category" />
-              <ComboboxContent className="pointer-events-auto">
-                <ComboboxList>
-                  {(item) => (
-                    <ComboboxItem key={item} value={item}>
-                      {item}
-                    </ComboboxItem>
-                  )}
-                </ComboboxList>
-              </ComboboxContent>
-            </Combobox>
-            <Button
-              onClick={() => {
-                setDisplayInput(false);
-              }}
-              className="cursor-pointer"
-            >
-              Cancel
-            </Button>
-            <DialogClose asChild>
-              <Button onClick={addToFavorites} className="cursor-pointer">
-                Submit
+      <div className={cn("z-10", className)}>
+        <Toggle pressed={isFavorite} onPressedChange={handleToggle} size="sm" className="cursor-pointer">
+          <Heart className="group-data-[state=on]/toggle:fill-destructive" />
+        </Toggle>
+        <Dialog open={displayInput}>
+          <DialogContent showCloseButton={false}>
+            <DialogHeader>
+              <DialogTitle className="text-center">Add favorite</DialogTitle>
+              <DialogDescription />
+              <Combobox
+                  items={categories}
+                  modal={false}
+                  value={inputCategory}
+                  onInputValueChange={handleInputCategoryChange}
+              >
+                <ComboboxInput placeholder="Name of category" />
+                <ComboboxContent className="pointer-events-auto">
+                  <ComboboxList>
+                    {(item) => (
+                        <ComboboxItem key={item} value={item}>
+                          {item}
+                        </ComboboxItem>
+                    )}
+                  </ComboboxList>
+                </ComboboxContent>
+              </Combobox>
+              <Button
+                  onClick={() => {
+                    setDisplayInput(false);
+                  }}
+                  className="cursor-pointer"
+              >
+                Cancel
               </Button>
-            </DialogClose>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    </div>
+              <DialogClose asChild>
+                <Button onClick={addToFavorites} className="cursor-pointer">
+                  Submit
+                </Button>
+              </DialogClose>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      </div>
   );
 }
+
 export default FavoriteBar;

@@ -113,7 +113,7 @@ function Favorites() {
     return (
         <>
             <main className="flex-1 flex flex-col items-center px-4 pt-6 pb-12 w-full max-w-2xl mx-auto gap-8">
-                <div className="w-full bg-card border rounded-xl px-6 pt-6 pb-2">
+                <div className="w-full bg-card rounded-md px-6 pt-6 pb-2">
 
                     <Collapsible
                         open={isOpen}
@@ -150,12 +150,12 @@ function Favorites() {
                                 </Toggle>
 
                                 {activeCategories.map((cat) => (
-                                    <div key={cat} className="flex items-center gap-1 border border-input rounded-lg pl-1 pr-1">
+                                    <div key={cat} className="flex items-center gap-1 rounded-lg pl-1 pr-1">
                                         <Toggle
                                             pressed={!hiddenCategories.has(cat)}
                                             onPressedChange={() => toggleCategoryVisibility(cat)}
                                             variant="default"
-                                            className="bg-transparent text-foreground hover:bg-muted border-none shadow-none cursor-pointer"
+                                            className="bg-transparent text-primary hover:bg-muted border-none shadow-none cursor-pointer"
                                         >
                                             {cat}
                                         </Toggle>
@@ -182,16 +182,16 @@ function Favorites() {
 
                         return (
                             <div key={cat} className="flex flex-col w-full">
-                                <h3 className="text-xl font-bold mb-3 border-b pb-2 text-primary">{cat}</h3>
+                                <h3 className="text-xl font-bold pb-2 text-primary">{cat}</h3>
                                 <div className="flex flex-col gap-2">
                                     {catComics.map((comic) => (
                                         <div
                                             key={comic.num}
-                                            className="flex flex-row justify-between items-center bg-card border rounded-lg p-3 hover:bg-muted/50 transition-colors"
+                                            className="flex flex-row justify-between items-center bg-card rounded-md p-3 hover:bg-muted/50 transition-colors"
                                         >
                                             <Link
                                                 to={`/comicstrips/${comic.num}`}
-                                                className="flex flex-row items-center gap-4 min-w-0 flex-1 outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                                                className="flex flex-row items-center gap-4 min-w-0 flex-1 outline-none focus-visible:ring-2 focus-visible:ring-ring"
                                             >
                                                 <span className="font-medium truncate">{comic.title}</span>
                                                 <span className="text-sm text-muted-foreground shrink-0">#{comic.num}</span>
@@ -212,7 +212,7 @@ function Favorites() {
                     })}
 
                     {comics.length === 0 && (
-                        <div className="text-center text-muted-foreground mt-8">
+                        <div className="text-center text-muted-foreground mt-2">
                             No favorites saved yet.
                         </div>
                     )}

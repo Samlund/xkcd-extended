@@ -2,13 +2,12 @@ import { keepPreviousData, useInfiniteQuery, useQuery } from "@tanstack/react-qu
 import { Spinner } from "@/components/ui/spinner.jsx";
 import { xkcd } from "@/lib/external/xkcd.js";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll.jsx";
-import FavoriteBar from "@/components/layout/FavoriteBar.jsx";
 import { useState } from "react";
 import { Button } from "@/components/ui/button.jsx";
 import { Repeat } from "lucide-react";
-import ScrollToTop from "@/components/layout/ScrollToTop"
+import ScrollToTop from "@/components/layout/ScrollToTop";
 import LoadingState from "@/components/layout/LoadingState.jsx";
-import { Link } from "react-router";
+import Comic from "@/components/layout/Comic.jsx";
 
 function Home() {
     const [reversed, setReversed] = useState(false);
@@ -57,15 +56,14 @@ function Home() {
                     Reverse
                 </Button>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center px-1">
                 {comics.map(comic => (
-                    <div key={comic.num} className="flex flex-col overflow-auto border-4 m-4 rounded-md">
-                        <FavoriteBar id={comic.num} className="sticky top-0 z-10" />
-                        <Link to={`/comicstrips/${comic.num}`}>
-                            <img className="max-w-full h-auto pb-12" src={comic.img} alt="Comic strip" />
-                        </Link>
-                    </div>
-
+                    <Comic
+                        key={comic.num}
+                        comic={comic}
+                        isLink
+                        className="m-4 w-full max-w-3xl overflow-auto"
+                    />
                 ))}
                 {comicsQuery.hasNextPage && <div ref={loadRef} className="h-px" /> }
                 {comicsQuery.isFetchingNextPage && <Spinner className="size-7 mb-4" />}
