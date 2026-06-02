@@ -1,9 +1,7 @@
 import ComicCarousel from "@/components/layout/ComicCarousel";
-import { Spinner } from "@/components/ui/spinner";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { xkcd } from "@/lib/external/xkcd.js";
-import Navbar from "@/components/layout/Navbar";
 import LoadingState from "@/components/layout/LoadingState.jsx";
 
 function ComicStrip({ params }) {
