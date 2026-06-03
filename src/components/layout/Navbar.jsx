@@ -7,7 +7,7 @@ function Navbar() {
         <div className="flex-2 flex items-center">
           <NavLink
             to="/"
-            className="text-slate-50 text-2xl font-bold"
+            className="text-background text-2xl font-bold"
           >
             XKCD EXTENDED
           </NavLink>
@@ -15,7 +15,7 @@ function Navbar() {
         <div className="flex-1 flex items-center justify-end">
           <NavLink
             to="/comicstrips/random"
-            className="text-gray-400 text-lg font-semibold"
+            className="text-secondary text-lg font-semibold"
           >
             RANDOM
           </NavLink>
@@ -23,7 +23,7 @@ function Navbar() {
         <div className="flex-1 flex items-center justify-end">
           <NavLink
             to="/favorites"
-            className="text-gray-400 text-lg font-semibold"
+            className="text-secondary text-lg font-semibold"
           >
             FAVORITES
           </NavLink>
