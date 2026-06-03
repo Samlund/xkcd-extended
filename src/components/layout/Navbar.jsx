@@ -15,7 +15,7 @@ function Navbar() {
         <div className="flex-1 flex items-center justify-end">
           <NavLink
             to="/comicstrips/random"
-            className="text-secondary text-lg font-semibold"
+            className="text-secondary text-xl font-semibold"
           >
             RANDOM
           </NavLink>
@@ -23,7 +23,7 @@ function Navbar() {
         <div className="flex-1 flex items-center justify-end">
           <NavLink
             to="/favorites"
-            className="text-secondary text-lg font-semibold"
+            className="text-secondary text-xl font-semibold"
           >
             FAVORITES
           </NavLink>
