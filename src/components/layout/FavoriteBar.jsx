@@ -32,7 +32,13 @@ function FavoriteBar({ id, className }) {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       try {
-        vals = [...JSON.parse(localStorage.getItem(key))];
+        const parsed = JSON.parse(localStorage.getItem(key));
+
+        if (typeof parsed === "string" && parsed.trim() !== "") {
+          vals.push(parsed);
+        } else if (Array.isArray(parsed)) {
+          vals.push(...parsed);
+        }
       } catch (e) {
         // silently ignore localStorage items that are not valid JSON
       }
