@@ -97,13 +97,13 @@ function Favorites() {
             ...customCategories,
             ...comics.map((c) => c.category).filter((c) => c && c.trim() !== ""),
         ])
-    ).filter((cat) => cat !== "Uncategorized");
+    ).filter((cat) => cat.toLowerCase() !== "uncategorized");
 
     const groupedComics = { Uncategorized: [] };
     activeCategories.forEach((cat) => (groupedComics[cat] = []));
 
     comics.forEach((comic) => {
-        const cat = comic.category && comic.category.trim() !== "" ? comic.category : "Uncategorized";
+        const cat = comic.category && comic.category.trim() !== "" ? comic.category.toLowerCase() : "uncategorized";
         if (!groupedComics[cat]) groupedComics[cat] = [];
         groupedComics[cat].push(comic);
     });
