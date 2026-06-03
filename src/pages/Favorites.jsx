@@ -103,7 +103,7 @@ function Favorites() {
     activeCategories.forEach((cat) => (groupedComics[cat] = []));
 
     comics.forEach((comic) => {
-        const cat = comic.category && comic.category.trim() !== "" ? comic.category.toLowerCase() : "uncategorized";
+        const cat = comic.category && comic.category.trim() !== "" ? comic.category : "Uncategorized";
         if (!groupedComics[cat]) groupedComics[cat] = [];
         groupedComics[cat].push(comic);
     });
