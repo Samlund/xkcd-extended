@@ -1,1 +1,0 @@
-Alla shadcn komponenter hamnar här. Shadcn kräver tailwind och stylas med det. Men vi kan styla annat parallellt med vanlig css. Ladda ner komponenter med npm enligt docs, ex. npx shadcn@latest add \<component>.
