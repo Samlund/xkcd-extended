@@ -84,7 +84,7 @@ function Favorites() {
         return (
             <div className="flex flex-col min-h-screen">
                 <div className="flex justify-center items-center flex-grow">
-                    <Spinner className="size-8" />
+                    <Spinner className="size-7" />
                 </div>
             </div>
         );
