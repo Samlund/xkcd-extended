@@ -26,36 +26,51 @@ export function ComicCarousel({ id, comicList, latest, loading }) {
   const hasNext = !!comicList[2]?.img;
 
   return (
-      <Carousel opts={{ watchDrag: false }} className="w-full">
-        <CarouselContent className="flex justify-center items-center m-0">
-          {hasPrevious && (
-              <CarouselItem className="basis-1/5 pl-0">
-                <Comic comic={comicList[0]} className="h-[40vh] overflow-hidden" titleClassName="text-sm" />
-              </CarouselItem>
-          )}
-
-          <CarouselItem className="basis-full lg:basis-3/5 pl-0">
-            <Comic comic={comicList[1]} className="h-[80vh] lg:m-4 overflow-auto" />
+    <Carousel opts={{ watchDrag: false }} className="w-full">
+      <CarouselContent className="flex justify-center items-center m-0">
+        {hasPrevious ? (
+          <CarouselItem className="basis-1/5 pl-0">
+            <Comic
+              comic={comicList[0]}
+              className="h-[40vh] overflow-hidden"
+              titleClassName="text-sm"
+            />
           </CarouselItem>
+        ) : (
+          <CarouselItem className="basis-1/5 pl-0" />
+        )}
 
-          {hasNext && (
-              <CarouselItem className="basis-1/5 pl-0 text-sm">
-                <Comic comic={comicList[2]} className="h-[40vh] overflow-hidden" titleClassName="text-sm" />
-              </CarouselItem>
-          )}
-        </CarouselContent>
+        <CarouselItem className="basis-full lg:basis-3/5 pl-0">
+          <Comic
+            comic={comicList[1]}
+            className="h-[80vh] lg:m-4 overflow-auto"
+          />
+        </CarouselItem>
 
-        <CarouselNext
-            func={nextComic}
-            loading={loading || !hasNext}
-            className={`-active:data-[slot=carousel-next]:translate-y-[calc(-50%+1px)] ${hasNext ? "cursor-pointer" : ""}`}
-        />
-        <CarouselPrevious
-            func={previousComic}
-            loading={loading || !hasPrevious}
-            className={`active:data-[slot=carousel-previous]:translate-y-[calc(-50%+1px)] ${hasPrevious ? "cursor-pointer" : ""}`}
-        />
-      </Carousel>
+        {hasNext ? (
+          <CarouselItem className="basis-1/5 pl-0 text-sm">
+            <Comic
+              comic={comicList[2]}
+              className="h-[40vh] overflow-hidden"
+              titleClassName="text-sm"
+            />
+          </CarouselItem>
+        ) : (
+          <CarouselItem className="basis-1/5 pl-0" />
+        )}
+      </CarouselContent>
+
+      <CarouselNext
+        func={nextComic}
+        loading={loading || !hasNext}
+        className={`active:data-[slot=carousel-next]:translate-y-[calc(-50%+1px)] ${hasNext ? "cursor-pointer" : ""}`}
+      />
+      <CarouselPrevious
+        func={previousComic}
+        loading={loading || !hasPrevious}
+        className={`active:data-[slot=carousel-previous]:translate-y-[calc(-50%+1px)] ${hasPrevious ? "cursor-pointer" : ""}`}
+      />
+    </Carousel>
   );
 }
 
