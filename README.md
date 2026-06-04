@@ -10,3 +10,13 @@ Angular is structurally designed for complex enterprise applications, whereas Re
 
 References:
 [1] https://consoleops.com/blog/top-10-web-development-frameworks-in-2026-how-to-choose-the-right-one
+
+## Running Locally
+
+To run the project locally, navigate to the project directory, then install dependencies: 
+
+``npm install``
+
+Start the development server:
+
+``npm run dev``
