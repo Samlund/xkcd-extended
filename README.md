@@ -15,7 +15,7 @@ References:
 
 After downloading the project, open the folder with an IDE; Visual Studio Code 1.123.0 for suggestion's sake.
 
-Open the terminal, ensure the path resolves to the xkcd-extendend folder, then install dependencies: 
+Open the terminal, ensure the path resolves to the xkcd-extended folder, then install dependencies: 
 
 ``npm install``
 
