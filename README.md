@@ -13,10 +13,14 @@ References:
 
 ## Running Locally
 
-To run the project locally, navigate to the project directory, then install dependencies: 
+After downloading the project, open the folder with an IDE; Visual Studio Code 1.123.0 for suggestion's sake.
+
+Open the terminal, ensure the path resolves to the xkcd-extendend folder, then install dependencies: 
 
 ``npm install``
 
 Start the development server:
 
 ``npm run dev``
+
+Lastly, open the local web page address http://localhost:5173 with a browser of your choice, e.g. Mozilla Firefox.
